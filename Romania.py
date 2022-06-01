@@ -1,15 +1,3 @@
-graph = {
-    "5": ["3", "7"],
-    "3": ["2", "4"],
-    "7": ["8"],
-    "2": [],
-    "4": ["8"],
-    "8": [],
-}
-
-# for vertex in graph:
-#     print(f"Vertex : {vertex}\nConnected Edges : {graph[vertex]}\n")
-
 Romania_Graph = {
     "Arad": [
         ["Zerind", 75],
@@ -75,7 +63,7 @@ Romania_Graph = {
         ["Bucharest", 90],
     ],
     "Urziceni": [
-        ["Buchrest", 85],
+        ["Bucharest", 85],
         ["Hirsova", 98],
         ["Vaslui", 142],
     ],
@@ -99,6 +87,24 @@ Romania_Graph = {
     ],
 }
 
-# print(Romania_Graph['Arad'][0])
-for neighbour in Romania_Graph['Arad']:
-    print(neighbour[0])
+
+def printGraph():
+    for vertex in Romania_Graph:
+        for edges in Romania_Graph[vertex]:
+            print(f"{vertex} 👉 {edges[0]}, weight : {edges[1]}")
+
+
+# printGraph()
+visited = []
+
+
+def DFS(visited, graph, node):
+    if node not in visited:
+        print(node)
+        visited.append(node)
+
+        for neighbour in graph[node]:
+            DFS(visited, graph, neighbour[0])
+
+
+DFS(visited, Romania_Graph, "Arad")
