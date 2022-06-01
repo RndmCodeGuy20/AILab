@@ -94,22 +94,28 @@ stack = []
 def DFS(start):
     stack.append(start)
     depth = 0
-
+    distance = 0
+ 🎉
     while len(stack) != 0:
         node = stack.pop()
 
         if node not in visited:
-            print(f"{node} 👉 ", end=" ")
+            print(f"{node}", end=" 👉 ")
             visited.append(node)
             depth += 1
 
-            if node == "Bucharest":
+            if node == "Bucharest" or "Bucharest" in visited:
                 break
 
             for neighbour in Romania_Graph[node]:
                 stack.append(neighbour[0])
+            distance += neighbour[1]
 
-    return depth
+    return [depth, distance]
 
 
-print(f"\n\nDepth at which Bucharest was found = {DFS('Arad')}")
+val = DFS("Arad")
+
+print(
+    f"\n\nDepth at which Bucharest was found = {val[0]}\nDistance from start to goal = {val[1]}"
+)
