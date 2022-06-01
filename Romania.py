@@ -13,10 +13,10 @@ Romania_Graph = {
         ["Lugoj", 111],
     ],
     "Sibiu": [
+        ["Fagaras", 99],
         ["Arad", 140],
         ["Oradea", 151],
         ["Rimnicu Vilcea", 80],
-        ["Fagaras", 99],
     ],
     "Oradea": [
         ["Zerind", 71],
@@ -87,24 +87,29 @@ Romania_Graph = {
     ],
 }
 
-
-def printGraph():
-    for vertex in Romania_Graph:
-        for edges in Romania_Graph[vertex]:
-            print(f"{vertex} 👉 {edges[0]}, weight : {edges[1]}")
-
-
-# printGraph()
 visited = []
+stack = []
 
 
-def DFS(visited, graph, node):
-    if node not in visited:
-        print(node)
-        visited.append(node)
+def DFS(start):
+    stack.append(start)
+    depth = 0
 
-        for neighbour in graph[node]:
-            DFS(visited, graph, neighbour[0])
+    while len(stack) != 0:
+        node = stack.pop()
+
+        if node not in visited:
+            print(f"{node} 👉 ", end=" ")
+            visited.append(node)
+            depth += 1
+
+            if node == "Bucharest":
+                break
+
+            for neighbour in Romania_Graph[node]:
+                stack.append(neighbour[0])
+
+    return depth
 
 
-DFS(visited, Romania_Graph, "Arad")
+print(f"\n\nDepth at which Bucharest was found = {DFS('Arad')}")
