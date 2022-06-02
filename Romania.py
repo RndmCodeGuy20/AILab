@@ -95,7 +95,7 @@ def DFS(start):
     stack.append(start)
     depth = 0
     distance = 0
- 🎉
+
     while len(stack) != 0:
         node = stack.pop()
 
