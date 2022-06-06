@@ -2,4 +2,4 @@
 
 ---
 
-> Pro tip : code here is just for reference, please use them reference and reference only.
+> Pro tip : code here is just for reference, please use them for reference and reference only.
