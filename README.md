@@ -1,11 +1,22 @@
-import simple_chalk as chalk
+# <center>Teacher's Assignment 1 - Romania Graph Solver Using Different Algorithms</center>
 
+### Date: June 6, 2022 <br>
+
+### Roll Number: 63 <br>
+
+### Student: Shantanu Mane <br>
+
+### Tags: Assignment <br>
+
+# _Code ⬇️_
+
+```python
+import simple_chalk as chalk
 
 class City:
     def __init__(self, name: str, heuristic: int) -> None:
         self.name = name
         self.heuristic = heuristic
-
 
 Arad = City("Arad", 366)
 Bucharest = City("Bucharest", 0)
@@ -117,7 +128,6 @@ Romania_Graph = {
     ],
 }
 
-
 def DFS(start):
     visited = []
     stack = []
@@ -148,7 +158,6 @@ def DFS(start):
 
     return [pathcost, depth]
 
-
 def DLFS(start, limit=3):
     visited = []
     stack = []
@@ -174,10 +183,8 @@ def DLFS(start, limit=3):
 
     return [pathcost, depth]
 
-
 goalReached = False
 count = 0
-
 
 def IterDFS(start, limit):
     global goalReached, count
@@ -208,7 +215,6 @@ def IterDFS(start, limit):
     print("\n")
     IterDFS("Arad", count)
 
-
 def A_Star_Search(start):
     stack = []
     visited = []
@@ -238,7 +244,6 @@ def A_Star_Search(start):
 
     return totalPathCost
 
-
 print(chalk.magenta.bgGray.underline(f"\n\t\t\t\t\t 🔍⛵🌊🦭🔎 Romania Graph Solver 🔍⛵🌊🦭🔎"))
 print(
     chalk.grey(
@@ -259,7 +264,6 @@ print(
     )
 )
 
-
 print(chalk.cyan("DLFS : \t"))
 rezDLFS = DLFS("Arad")
 print(
@@ -272,7 +276,6 @@ print(
         "\n-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n\n"
     )
 )
-
 
 print(chalk.cyan("IterDFS : \t"))
 IterDFS("Arad", count)
@@ -287,7 +290,6 @@ print(
     )
 )
 
-
 print(chalk.cyan("A* : \t"))
 rezDFS = A_Star_Search(start=[Arad.name, Arad.heuristic])
 print(chalk.blue(f"\nA* Search to find 'Bucharest' ➡️ \nPath Cost : {rezDFS}"))
@@ -296,3 +298,76 @@ print(
         "\n-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"
     )
 )
+```
+
+# _Explanation_ ⬇️
+
+1. DFS Function
+   - Explores nodes in Depth First Search order.
+   - Tree search is _not_ implemented, as it creates looping
+   - > Note : tree search can be implemented and will give a valid output, but that will solely depend on the position of child nodes in the adjacency list. Which makes it un-generalised.
+2. DLFS Function
+
+   - Explores nodes in Depth Limited Search pattern.
+   - Depth limit is given as 3.
+   - Goal node cannot be reached in depth 3 in any path possible.
+
+3. IDFS Function
+
+   - Explores nodes in Iterative DFS.
+   - Increases limit of DFS in every iteration until goal node is reached.
+
+4. A\* Function
+   - Explores nodes in A\* search pattern
+   - Heuristic is airline / straightline distance from each and every node to goal node.
+
+# _Output ⬇️_
+
+```python
+🔍⛵🌊🦭🔎 Romania Graph Solver 🔍⛵🌊🦭🔎
+
+-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+DFS :
+Arad 👉 Sibiu 👉 Rimnicu 👉 Pitesti 👉 Bucharest
+
+Depth First Search to find 'Bucharest' ➡️
+Path Cost : 418		Depth : 4
+
+-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+DLFS :
+Arad 👉 Sibiu 👉 Rimnicu 👉
+
+Depth Limited First Search to find 'Bucharest' ➡️
+Path Cost : 317		Depth : 3
+
+With maximum depth = 3, goal state could not be reached!!!
+
+-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+IterDFS :
+
+Arad 👉
+
+Arad 👉 Sibiu 👉
+
+Arad 👉 Sibiu 👉 Rimnicu 👉
+
+Arad 👉 Sibiu 👉 Rimnicu 👉 Pitesti 👉
+
+Arad 👉 Sibiu 👉 Rimnicu 👉 Pitesti 👉 Bucharest
+
+Iterative Depth First Search to find 'Bucharest' ➡️
+Goal State was reached after 5 iterations!
+
+-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+A* :
+Arad 👉 Sibiu 👉 Rimnicu 👉 Pitesti 👉 Bucharest
+
+A* Search to find 'Bucharest' ➡️
+Path Cost : 1746
+
+-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+```

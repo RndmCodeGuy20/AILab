@@ -1,130 +1,111 @@
-graph = {
-    "5": ["3", "7"],
-    "3": ["2", "4"],
-    "7": ["8"],
-    "2": [],
-    "4": ["8"],
-    "8": [],
-}
-
-# for vertex in graph:
-#     print(f"Vertex : {vertex}\nConnected Edges : {graph[vertex]}\n")
-
-Romania_Graph = {
+romania = {
     "Arad": [
-        ["Zerind", 75],
-        ["Timisora", 118],
-        ["Sibiu", 140],
+        "Sibiu",
+        "Zerind",
+        "Timisoara",
     ],
     "Zerind": [
-        ["Arad", 75],
-        ["Oradea", 71],
-    ],
-    "Timisora": [
-        ["Arad", 118],
-        ["Lugoj", 111],
-    ],
-    "Sibiu": [
-        ["Arad", 140],
-        ["Oradea", 151],
-        ["Rimnicu Vilcea", 80],
-        ["Fagaras", 99],
+        "Arad",
+        "Oradea",
     ],
     "Oradea": [
-        ["Zerind", 71],
-        ["Sibiu", 151],
+        "Zerind",
+        "Sibiu",
     ],
-    "Lugoj": [
-        ["Timisora", 111],
-        ["Mehadia", 70],
+    "Sibiu": [
+        "Arad",
+        "Oradea",
+        "Fagaras",
+        "Rimnicu",
     ],
-    "Rimnicu Vilcea": [
-        ["Sibiu", 80],
-        ["Craiova", 146],
-        ["Pitesti", 97],
-    ],
-    "Fagaras": [
-        ["Sibiu", 99],
-        ["Bucharest", 211],
-    ],
-    "Mehadia": [
-        ["Lugoj", 70],
-        ["Dobreta", 75],
-    ],
-    "Dobreta": [
-        ["Craiova", 120],
-        ["Mehadia", 75],
-    ],
-    "Craiova": [
-        ["Dobreta", 120],
-        ["Rimnicu Vilcea", 146],
-        ["Pitesti", 138],
-    ],
-    "Pitesti": [
-        ["Rimnicu Vilcea", 97],
-        ["Craiova", 138],
-        ["Bucharest", 101],
-    ],
-    "Bucharest": [
-        ["Pitesti", 101],
-        ["Fagaras", 211],
-        ["Giurgiu", 90],
-        ["Urziceni", 85],
+    "Timisoara": [
+        "Arad",
+        "Lugoj",
     ],
     "Giurgiu": [
-        ["Bucharest", 90],
+        "Bucharest",
     ],
     "Urziceni": [
-        ["Buchrest", 85],
-        ["Hirsova", 98],
-        ["Vaslui", 142],
+        "Bucharest",
+        "Vaslui",
+        "Hirsova",
     ],
     "Hirsova": [
-        ["Urziceni", 98],
-        ["Eforie", 86],
+        "Urziceni",
+        "Eforie",
     ],
     "Eforie": [
-        ["Hirsova", 86],
+        "Hirsova",
+    ],
+    "Lugoj": [
+        "Timisoara",
+        "Mehadia",
+    ],
+    "Mehadia": [
+        "Lugoj",
+        "Drobeta",
+    ],
+    "Drobeta": [
+        "Mehadia",
+        "Craiova",
+    ],
+    "Craiova": [
+        "Drobeta",
+        "Rimnicu",
+        "Pitesti",
+    ],
+    "Rimnicu": [
+        "Sibiu",
+        "Craiova",
+        "Pitesti",
+    ],
+    "Fagaras": [
+        "Sibiu",
+        "Bucharest",
+    ],
+    "Pitesti": [
+        "Rimnicu",
+        "Craiova",
+        "Bucharest",
+    ],
+    "Bucharest": [
+        "Fagaras",
+        "Pitesti",
+        "Giurgiu",
+        "Urziceni",
     ],
     "Vaslui": [
-        ["Urziceni", 142],
-        ["Lasi", 92],
+        "Iasi",
+        "Urziceni",
     ],
-    "Lasi": [
-        ["Vaslui", 92],
-        ["Neamt", 87],
+    "Iasi": [
+        "Vaslui",
+        "Neamt",
     ],
     "Neamt": [
-        ["Lasi", 87],
+        "Iasi",
     ],
 }
 
-# print(Romania_Graph['Arad'][0])
-# for neighbour in Romania_Graph['Arad']:
-#     print(neighbour[0])
 
-# DFS algorithm in Python
+def DFS(start):
+    stack = []
+    vis = []
+    stack.append(start)
+
+    while len(stack) != 0:
+        node = stack.pop()
+
+        if node == "Bucharest":
+            print(node)
+            break
+
+        if node not in vis:
+            print(node)
+            vis.append(node)
+
+            for neighbour in romania[node]:
+                stack.append(neighbour)
 
 
-# DFS algorithm
-def dfs(graph, start, visited=None):
-    if visited is None:
-        visited = set()
-    visited.add(start)
-
-    print(start)
-
-    for next in graph[start] - visited:
-        dfs(graph, next, visited)
-    return visited
-
-
-graph = {
-    "0": set(["1", "2"]),
-    "1": set(["0", "3", "4"]),
-    "2": set(["0"]),
-    "3": set(["1"]),
-    "4": set(["2", "3"]),
-}
-
-dfs(graph, "0")
+DFS("Arad")
