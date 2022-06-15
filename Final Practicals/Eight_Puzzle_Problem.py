@@ -83,37 +83,52 @@ def moveBlankLeft(puzzleState):
     return tempState
 
 
-frontier = []
-explored = []
-count = 0
+def main():
 
-frontier.append(InitialState)
-explored.append(InitialState)
+    global InitialState, FinalState
 
-while len(frontier) != 0:
-    InitialState = frontier.pop(0)
-    print(f"{InitialState}")
+    frontier = []
+    explored = []
+    count = 0
+    depth = 0
 
-    if InitialState == FinalState:
-        print(f"Goal State : {InitialState} reached after searching {count} nodes.")
-        break
+    frontier.append(InitialState)
+    explored.append(InitialState)
 
-    if moveBlankLeft(InitialState) not in explored:
-        frontier.append(moveBlankLeft(InitialState))
-        explored.append(moveBlankLeft(InitialState))
-        count += 1
+    while len(frontier) != 0:
+        InitialState = frontier.pop(0)
+        print(f"\n\nDepth : {depth} ➡️ To be explored : {InitialState}\n")
 
-    if moveBlankRight(InitialState) not in explored:
-        frontier.append(moveBlankRight(InitialState))
-        explored.append(moveBlankRight(InitialState))
-        count += 1
+        if InitialState == FinalState:
+            print(f"Goal State : {InitialState} reached after searching {count} nodes.")
+            break
 
-    if moveBlankUp(InitialState) not in explored:
-        frontier.append(moveBlankUp(InitialState))
-        explored.append(moveBlankUp(InitialState))
-        count += 1
+        if moveBlankLeft(InitialState) not in explored:
+            frontier.append(moveBlankLeft(InitialState))
+            explored.append(moveBlankLeft(InitialState))
+            count += 1
+            print(f"{moveBlankLeft(InitialState)}", end="---")
 
-    if moveBlankDown(InitialState) not in explored:
-        frontier.append(moveBlankDown(InitialState))
-        explored.append(moveBlankDown(InitialState))
-        count += 1
+        if moveBlankRight(InitialState) not in explored:
+            frontier.append(moveBlankRight(InitialState))
+            explored.append(moveBlankRight(InitialState))
+            count += 1
+            print(f"{moveBlankRight(InitialState)}", end="---")
+
+        if moveBlankUp(InitialState) not in explored:
+            frontier.append(moveBlankUp(InitialState))
+            explored.append(moveBlankUp(InitialState))
+            count += 1
+            print(f"{moveBlankUp(InitialState)}", end="---")
+
+        if moveBlankDown(InitialState) not in explored:
+            frontier.append(moveBlankDown(InitialState))
+            explored.append(moveBlankDown(InitialState))
+            count += 1
+            print(f"{moveBlankDown(InitialState)}", end="\n")
+
+        depth += 1
+
+
+if __name__ == "__main__":
+    main()
