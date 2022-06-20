@@ -1,3 +1,10 @@
+"""
+@author Shantanu Mane (RndmCodeGuy20)
+@branch CSE - AIML
+@semester IV
+@topic TA2 - Programming Assignment
+"""
+
 initialMonkeyPosition = [0, 0, 0]
 
 finalMonkeyPosition = [5, 5, 1]
@@ -104,7 +111,7 @@ def findBananaInRoom(currentPosition):
     while len(frontier) != 0:
         frontier.sort(key=lambda frontier: frontier[1])
         state = frontier.pop(0)[0]
-        print(f"{state}", end=" ➡️ ")
+        print(f"{state}\n   ⬇️")
 
         if state == finalMonkeyPosition:
             monkey.updateBananaStatus(1)
@@ -148,7 +155,7 @@ def findChairInRoom(initialMonkeyPosition, chairPosition):
         frontier.sort(key=lambda frontier: frontier[1])
         state = frontier.pop(0)[0]
         monkey.updatePosition(state)
-        print(f"{state}", end=" ➡️ ")
+        print(f"{state}\n   ⬇️")
 
         if state == chairPosition:
             print(f" Monkey has found the chair!!!", end=" ➡️ ")
